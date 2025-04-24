@@ -1,0 +1,59 @@
+---
+interface NewsItem {
+  header?: string;
+  content: string;
+}
+
+interface Props {
+  newsItems?: NewsItem[];
+  customerPromo?: string;
+}
+
+const { 
+  newsItems = [
+    { header: "Breaking News", content: "Important update 1" },
+    { content: "Regular news item 1" },
+    { header: "Latest Updates", content: "Important update 2" },
+    { content: "Regular news item 2" }
+  ],
+  customerPromo = "/customer-promo.jpg"
+} = Astro.props;
+---
+
+<div class="h-full grid grid-cols-6">
+  {/* Left Section - News */}
+  <div class="col-span-5 p-4">
+    <div class="news-container h-full">
+      {newsItems.map((item, index) => (
+        <div class="news-item opacity-0 transition-opacity duration-500">
+          {item.header && (
+            <h3 class="text-xl font-bold mb-2 text-blue-400">{item.header}</h3>
+          )}
+          <p class="text-lg">{item.content}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Right Section - Customer Promo */}
+  <div class="col-span-1 p-4 border-l border-gray-700">
+    <div class="h-full">
+      <img 
+        src={customerPromo} 
+        alt="Customer Promotion" 
+        class="w-full h-full object-cover rounded-lg"
+      />
+    </div>
+  </div>
+</div>
+
+<style>
+  .news-container {
+    animation: fadeNews 20s infinite;
+  }
+
+  @keyframes fadeNews {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
+  }
+</style> 

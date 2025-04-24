@@ -1,0 +1,27 @@
+---
+import SidebarPanel from './SidebarPanel.astro';
+import Footer from './Footer.astro';
+import MainContent from './MainContent.astro';
+---
+
+<div class="grid grid-cols-6 h-screen">
+  {/* Sidebar Panel */}
+  <div class="col-span-1 h-full">
+    <SidebarPanel />
+  </div>
+
+  {/* Main Content Area */}
+  <div class="col-span-5 h-full">
+    <div class="grid grid-rows-6 h-full">
+      {/* Main Content */}
+      <div class="row-span-4">
+        <MainContent />
+      </div>
+
+      {/* Footer */}
+      <div class="row-span-2">
+        <Footer />
+      </div>
+    </div>
+  </div>
+</div> 

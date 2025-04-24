@@ -1,4 +1,60 @@
-# Astro Starter Kit: Minimal
+# TV Layout
+
+A modern, responsive TV screen layout built with Astro and Tailwind CSS.
+
+## Features
+
+- Responsive grid layout
+- Animated promotional content
+- News ticker with headers
+- Video feed display
+- Modern UI with Tailwind CSS
+
+## Project Structure
+
+```
+src/
+  ├── components/
+  │   ├── TVLayout.astro      # Main layout component
+  │   ├── SidebarPanel.astro  # Left sidebar with logo and promotions
+  │   ├── Footer.astro        # Bottom section with news and customer promo
+  │   └── MainContent.astro   # Main content area for video feed
+  ├── layouts/
+  │   └── Layout.astro        # Base layout with Tailwind CSS
+  └── pages/
+      └── index.astro         # Main page
+```
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Customization
+
+- Add your logo to `/public/placeholder-logo.png`
+- Add promotional images to `/public/promo1.jpg`, `/public/promo2.jpg`, etc.
+- Add customer promotional image to `/public/customer-promo.jpg`
+- Update news items in the Footer component
+- Add video URL to the MainContent component
+
+## Technologies Used
+
+- Astro
+- Tailwind CSS
+- TypeScript
 
 ```sh
 npm create astro@latest -- --template minimal

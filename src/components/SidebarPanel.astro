@@ -1,0 +1,57 @@
+---
+interface Props {
+  logo?: string;
+  promotionalImages?: string[];
+}
+
+const { 
+  logo = "/placeholder-logo.png",
+  promotionalImages = ["/promo1.jpg", "/promo2.jpg", "/promo3.jpg"]
+} = Astro.props;
+---
+
+<div class="h-full flex flex-col">
+  {/* Top Section */}
+  <div class="flex-1 p-4">
+    <div class="mb-8">
+      <img src={logo} alt="Logo" class="w-32 h-auto" />
+    </div>
+    <div class="space-y-4">
+      {promotionalImages.map((image, index) => (
+        <div class="relative h-40 rounded-lg overflow-hidden">
+          <img 
+            src={image} 
+            alt={`Promotional ${index + 1}`}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Bottom Section */}
+  <div class="h-[400px] p-4 border-t border-gray-700">
+    <div class="promotional-list space-y-4">
+      {promotionalImages.map((image, index) => (
+        <div class="promotional-item opacity-0 transition-opacity duration-500">
+          <img 
+            src={image} 
+            alt={`Promotional ${index + 1}`}
+            class="w-full h-32 object-cover rounded-lg"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .promotional-list {
+    animation: fadeItems 15s infinite;
+  }
+
+  @keyframes fadeItems {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
+  }
+</style> 
