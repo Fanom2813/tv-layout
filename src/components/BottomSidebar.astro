@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import dummyData from '../data/dummy-data.json';
+
+interface QuickNewsItem {
+  header?: string;
+  content: string;
+  badge?: string;
+}
+
+interface Props {
+  quickNews?: QuickNewsItem[];
+  changeRate?: number; // Time in seconds for each news item
+}
+
+const { 
+  quickNews = dummyData.quickNews,
+  changeRate = 4 // Default to 4 seconds per news item
+} = Astro.props;
+
+// Calculate total animation duration based on number of items
+const totalDuration = changeRate * 3; // 3x the changeRate to account for transitions
+---
+
+<div class="h-full p-4 border-t border-gray-700 overflow-hidden text-white">
+  <div class="news-list h-full relative">
+    {(quickNews as QuickNewsItem[]).map((item: QuickNewsItem, index) => (
+      <div 
+        class="news-item absolute inset-0 flex flex-col justify-between transform transition-all duration-500 opacity-0"
+        style={`animation: fadeItem ${totalDuration}s ${index * changeRate}s infinite both;`}
+      >
+        <div class="flex flex-col h-full">
+          <div class="min-h-0 flex flex-col">
+            {item.header && (
+              <div class="text-xl font-bold leading-tight mb-3">
+                {item.header}
+              </div>
+            )}
+          </div>
+          <div class="text-sm text-gray-300 flex-1 overflow-hidden text-ellipsis">{item.content}</div>
+          
+          {item.badge && (
+            <div class="inline-flex items-center px-2 py-0.5 bg-red-600 text-white rounded-full self-start mt-2 text-xs">
+              <div class="w-1.5 h-1.5 bg-white rounded-full mr-1 animate-pulse"></div>
+              <span>{item.badge}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  @keyframes fadeItem {
+    /* Initial state - hidden */
+    0%, 100% { 
+      opacity: 0;
+      transform: translateY(20px);
+      z-index: 0;
+    }
+    
+    /* Fade in */
+    2%, 3% {
+      opacity: 0;
+      transform: translateY(20px);
+      z-index: 10;
+    }
+    
+    /* Fully visible */
+    8%, 25% { 
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 10;
+    }
+    
+    /* Begin fade out */
+    26%, 27% {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 10;
+    }
+    
+    /* Complete fade out */
+    33%, 99% { 
+      opacity: 0;
+      transform: translateY(-20px);
+      z-index: 0;
+    }
+  }
+
+  .news-item {
+    backface-visibility: hidden;
+    opacity: 0;
+    z-index: 0;
+  }
+</style> 

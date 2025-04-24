@@ -1,26 +1,53 @@
 ---
+import { Image } from 'astro:assets';
 import SidebarPanel from './SidebarPanel.astro';
 import Footer from './Footer.astro';
 import MainContent from './MainContent.astro';
+import dummyData from '../data/dummy-data.json';
+import BottomSidebar from './BottomSidebar.astro';
+import CustomerPromo from './CustomerPromo.astro';
+
+interface PromoItem {
+  url: string;
+  title: string;
+  duration: number;
+}
 ---
 
-<div class="grid grid-cols-6 h-screen">
-  {/* Sidebar Panel */}
-  <div class="col-span-1 h-full">
-    <SidebarPanel />
-  </div>
-
-  {/* Main Content Area */}
-  <div class="col-span-5 h-full">
-    <div class="grid grid-rows-6 h-full">
+<div class="fixed inset-0 flex flex-col overflow-hidden">
+  {/* Main Row */}
+  <div class="flex flex-1 overflow-hidden">
+    {/* Left Column */}
+    <div class="w-1/5 flex flex-col overflow-hidden">
+      {/* Top Sidebar */}
+      <div class="flex-1 overflow-hidden">
+        <SidebarPanel />
+      </div>
+      
+      {/* Bottom Sidebar */}
+      <div class="h-1/3 overflow-hidden">
+        <BottomSidebar />
+      </div>
+    </div>
+    
+    {/* Right Column */}
+    <div class="w-4/5 flex flex-col overflow-hidden">
       {/* Main Content */}
-      <div class="row-span-4">
+      <div class="flex-1 overflow-hidden">
         <MainContent />
       </div>
-
-      {/* Footer */}
-      <div class="row-span-2">
-        <Footer />
+      
+      {/* Footer Row */}
+      <div class="h-1/5 flex overflow-hidden">
+        {/* Footer */}
+        <div class="w-4/5 overflow-hidden">
+          <Footer />
+        </div>
+        
+        {/* Customer Promo */}
+        <div class="w-1/5  border-l border-gray-700 overflow-hidden">
+          <CustomerPromo />
+        </div>
       </div>
     </div>
   </div>

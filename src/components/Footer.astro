@@ -1,59 +1,179 @@
 ---
+import dummyData from '../data/dummy-data.json';
+
 interface NewsItem {
   header?: string;
-  content: string;
+  content?: string;
+  duration?: number;
+  badge?: string;
+}
+
+interface MatchItem {
+  home_team: string;
+  home_team_logo?: string;
+  away_team: string;
+  away_team_logo?: string;
+  match_time: string;
+  duration?: number;
+}
+
+// Define a union type for group items
+type GroupItemType = NewsItem | MatchItem;
+
+interface NewsGroup {
+  groupHeader: string;
+  newsItems: GroupItemType[];
 }
 
 interface Props {
-  newsItems?: NewsItem[];
-  customerPromo?: string;
+  newsGroups?: NewsGroup[];
 }
 
 const { 
-  newsItems = [
-    { header: "Breaking News", content: "Important update 1" },
-    { content: "Regular news item 1" },
-    { header: "Latest Updates", content: "Important update 2" },
-    { content: "Regular news item 2" }
-  ],
-  customerPromo = "/customer-promo.jpg"
+  newsGroups = dummyData.newsItems as NewsGroup[]
 } = Astro.props;
+
+
+// Helper function to determine if an item is a match item
+function isMatchItem(item: GroupItemType): item is MatchItem {
+  return 'home_team' in item && 'away_team' in item;
+}
+
 ---
 
-<div class="h-full grid grid-cols-6">
-  {/* Left Section - News */}
-  <div class="col-span-5 p-4">
-    <div class="news-container h-full">
-      {newsItems.map((item, index) => (
-        <div class="news-item opacity-0 transition-opacity duration-500">
-          {item.header && (
-            <h3 class="text-xl font-bold mb-2 text-blue-400">{item.header}</h3>
-          )}
-          <p class="text-lg">{item.content}</p>
+<div class="h-full overflow-hidden">
+  <div class="news-groups">
+    {newsGroups.map((group, groupIndex) => (
+      <div class="news-group hidden" data-group-index={groupIndex}>
+        <h2 class="text-xl font-bold text-white mb-3">{group.groupHeader}</h2>
+        <div class="news-items">
+          {group.newsItems.map((item, itemIndex) => (
+            <div 
+              class="news-item hidden" 
+              data-group-index={groupIndex} 
+              data-item-index={itemIndex}
+              data-duration={item.duration || 5}
+            >
+              {/* Check if this is a match item */}
+              {isMatchItem(item) ? (
+                <div class="match-item flex items-center justify-between bg-gray-800 p-3 rounded-lg">
+                  <div class="team-info flex items-center">
+                    {item.home_team_logo && (
+                      <img src={item.home_team_logo} alt={item.home_team} class="w-8 h-8 mr-2" />
+                    )}
+                    <span class="font-bold text-blue-300">{item.home_team}</span>
+                  </div>
+                  
+                  <div class="match-time bg-blue-900 px-2 py-1 rounded text-white text-xs">
+                    {item.match_time}
+                  </div>
+                  
+                  <div class="team-info flex items-center">
+                    <span class="font-bold text-red-300">{item.away_team}</span>
+                    {item.away_team_logo && (
+                      <img src={item.away_team_logo} alt={item.away_team} class="w-8 h-8 ml-2" />
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* Regular news item */
+                <>
+                  {item.header && (
+                    <h3 class="text-lg font-bold mb-1 text-blue-400">{item.header}</h3>
+                  )}
+                  {item.content && <p class="text-base">{item.content}</p>}
+                  {item.badge && (
+                    <span class="badge bg-red-500 text-white text-xs px-2 py-1 rounded ml-2">{item.badge}</span>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-
-  {/* Right Section - Customer Promo */}
-  <div class="col-span-1 p-4 border-l border-gray-700">
-    <div class="h-full">
-      <img 
-        src={customerPromo} 
-        alt="Customer Promotion" 
-        class="w-full h-full object-cover rounded-lg"
-      />
-    </div>
+      </div>
+    ))}
   </div>
 </div>
 
-<style>
-  .news-container {
-    animation: fadeNews 20s infinite;
-  }
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const newsGroups = document.querySelectorAll('.news-group');
+    if (!newsGroups.length) return;
+    
+    function showGroup(groupIndex: number) {
+      // Hide all groups
+      document.querySelectorAll('.news-group').forEach(group => {
+        group.classList.add('hidden');
+      });
+      
+      // Show current group
+      const currentGroup = document.querySelector(`.news-group[data-group-index="${groupIndex}"]`);
+      if (currentGroup) {
+        currentGroup.classList.remove('hidden');
+        showItem(groupIndex, 0);
+      }
+    }
+    
+    function showItem(groupIndex: number, itemIndex: number) {
+      // Hide all items in this group
+      document.querySelectorAll(`.news-item[data-group-index="${groupIndex}"]`).forEach(item => {
+        item.classList.add('hidden');
+        item.classList.remove('fade-in');
+      });
+      
+      // Show current item
+      const currentItem = document.querySelector(`.news-item[data-group-index="${groupIndex}"][data-item-index="${itemIndex}"]`);
+      if (currentItem) {
+        currentItem.classList.remove('hidden');
+        setTimeout(() => {
+          currentItem.classList.add('fade-in');
+        }, 50);
+        
+        // Get the duration from the item
+        const duration = parseInt(currentItem.getAttribute('data-duration') || '5', 10);
+        
+        // Schedule next item
+        setTimeout(() => {
+          // Move to next item or next group
+          const nextItemIndex = itemIndex + 1;
+          const itemsInCurrentGroup = document.querySelectorAll(`.news-item[data-group-index="${groupIndex}"]`).length;
+          
+          if (nextItemIndex < itemsInCurrentGroup) {
+            // Show next item in this group
+            showItem(groupIndex, nextItemIndex);
+          } else {
+            // Move to next group
+            const nextGroupIndex = (groupIndex + 1) % newsGroups.length;
+            showGroup(nextGroupIndex);
+          }
+        }, duration * 1000);
+      }
+    }
+    
+    // Start the rotation
+    showGroup(0);
+  });
+</script>
 
-  @keyframes fadeNews {
-    0%, 100% { opacity: 0; }
-    20%, 80% { opacity: 1; }
+<style>
+  .news-group, .news-item {
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .news-item {
+    opacity: 0;
+  }
+  
+  .news-item.fade-in {
+    opacity: 1;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .match-item {
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
   }
 </style> 

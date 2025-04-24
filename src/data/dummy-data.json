@@ -1,0 +1,140 @@
+{
+  "logo": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&h=100&fit=crop&q=80",
+  "promotionalImages": [
+    {
+      "url": "https://images.unsplash.com/photo-1579546929518-9e396a3b97f3?w=600&h=400&fit=crop&q=80",
+      "title": "Promotional Content 1",
+      "duration": 10
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1550745165-9bc0fc2527c2?w=600&h=400&fit=crop&q=80",
+      "title": "Promotional Content 2",
+      "duration": 15
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&q=80",
+      "title": "Promotional Content 3",
+      "duration": 12
+    }
+  ],
+  "featuredImages": [
+    {
+      "url": "https://plus.unsplash.com/premium_photo-1729708654992-28f9185f82b3?q=80&w=3987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Featured Content 1",
+      "duration": 10
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1745433921735-f5e2450cbec1?q=80&w=2994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Featured Content 2",
+      "duration": 15
+    },
+    {
+      "url": "https://plus.unsplash.com/premium_photo-1721268770804-f9db0ce102f8?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Featured Content 3",
+      "duration": 12
+    }
+  ],
+  "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+  "newsItems": [
+    {
+      "groupHeader": "Premier League",
+      "newsItems": [
+        {
+          "home_team": "Arsenal",
+          "home_team_logo": "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+          "away_team": "Crystal Palace",
+          "away_team_logo": "https://upload.wikimedia.org/wikipedia/en/0/0c/Crystal_Palace_FC_logo.svg",
+          "match_time": "10:00 PM",
+          "duration": 5
+        },
+        {
+          "home_team": "Liverpool",
+          "home_team_logo": "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+          "away_team": "Chelsea",
+          "away_team_logo": "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg",
+          "match_time": "8:30 PM",
+          "duration": 5
+        },
+        {
+          "home_team": "Manchester United",
+          "home_team_logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Manchester_United_FC_crest.svg",
+          "away_team": "Manchester City",
+          "away_team_logo": "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+          "match_time": "7:00 PM",
+          "duration": 5
+        }
+      ]
+    },
+    {
+      "newsItems": [
+        {
+          "header": "",
+          "content": "Lorem Ipsum is simtext ever since the 1500s, whee specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "duration": 3
+        },
+        {
+          "header": "Brea34king News",
+          "content": "Lorem Ipsum text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,including versions of Lorem Ipsum.",
+          "duration": 3
+        },
+        {
+          "header": "Breaking 34News",
+          "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passng software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "duration": 3
+        }
+      ]
+    },
+    {
+      "groupHeader": "jbjkb",
+      "newsItems": [
+        {
+          "header": "Latest34 Updates",
+          "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's staknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "duration": 3
+        },
+        {
+          "header": "Latest U4pdates",
+          "content": "Lorem Ipsum is simply the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "duration": 3
+        }
+      ]
+    }
+  ],
+  "customerPromos": [
+    {
+      "url": "https://images.unsplash.com/photo-1745432740829-da196b14a792?q=80&w=3648&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Customer Promotion 1",
+      "duration": 10
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1745425814434-28f5437b4dcf?q=80&w=3987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Customer Promotion 2",
+      "duration": 12
+    },
+    {
+      "url": "https://plus.unsplash.com/premium_photo-1713820020896-ae1aa8a65e30?q=80&w=3987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Customer Promotion 3",
+      "duration": 8
+    }
+  ],
+  "quickNews" : [
+    {
+        "header": "Breaking News",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "badge": "LIVE"
+    },
+    {
+        "header": "Latest Updates",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "badge": "LIVE"
+    },
+    {
+        "header": "Latest Updates",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "badge": "LIVE"
+    },
+    {
+        
+    }
+  ]
+} 

@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import dummyData from '../data/dummy-data.json';
+
+interface PromoItem {
+  url: string;
+  title: string;
+  duration: number;
+}
+
+interface Props {
+  promos?: PromoItem[];
+}
+
+const { 
+  promos = dummyData.customerPromos
+} = Astro.props;
+
+// Calculate total animation duration based on all items' durations
+const totalDuration = promos.reduce((sum, item) => sum + item.duration, 0);
+// Calculate accumulated delays for each item
+const delays = promos.reduce((acc, _, index) => {
+  if (index === 0) return [0];
+  const prevSum = acc[index - 1];
+  const prevDuration = promos[index - 1].duration;
+  return [...acc, prevSum + prevDuration];
+}, [0]);
+---
+
+<div class="customer-promo-container h-full overflow-hidden">
+  {promos.map((item: PromoItem, index: number) => (
+    <div class="customer-promo-item h-full relative" data-duration={item.duration}>
+      <Image 
+        src={item.url} 
+        alt={item.title} 
+        width={600}
+        height={200}
+        class="w-full h-full object-cover rounded-lg"
+      />
+    </div>
+  ))}
+</div>
+
+<script>
+  // Setup the rotation of images based on their durations
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.customer-promo-item');
+    if (items.length > 0) {
+      let currentIndex = 0;
+      
+      // Function to show a specific item
+      function showItem(index: number) {
+        // Hide all items
+        items.forEach(item => item.classList.remove('active'));
+        
+        // Show only the current item
+        items[index].classList.add('active');
+      }
+      
+      // Show the first item immediately
+      showItem(0);
+      
+      function rotateImages() {
+        // Calculate next index
+        currentIndex = (currentIndex + 1) % items.length;
+        
+        // Show next image
+        showItem(currentIndex);
+        
+        // Get duration from data attribute
+        const currentItem = items[currentIndex];
+        const duration = currentItem.getAttribute('data-duration');
+        const nextDuration = duration ? parseInt(duration) * 1000 : 5000;
+        
+        // Schedule the next rotation
+        setTimeout(rotateImages, nextDuration);
+      }
+      
+      // Get duration for first item
+      const firstItem = items[0];
+      const firstDuration = firstItem.getAttribute('data-duration');
+      const timeoutDuration = firstDuration ? parseInt(firstDuration) * 1000 : 5000;
+      
+      // Start the rotation after the first image's duration
+      setTimeout(rotateImages, timeoutDuration);
+    }
+  });
+</script>
+
+<style>
+  .customer-promo-container {
+    position: relative;
+  }
+  
+  .customer-promo-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .customer-promo-item.active {
+    opacity: 1;
+  }
+</style>

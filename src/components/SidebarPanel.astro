@@ -1,57 +1,94 @@
 ---
+import { Image } from 'astro:assets';
+import dummyData from '../data/dummy-data.json';
+
+interface PromoItem {
+  url: string;
+  title: string;
+  duration: number;
+}
+
 interface Props {
   logo?: string;
-  promotionalImages?: string[];
+  promotionalImages?: PromoItem[];
+  featuredImages?: PromoItem[];
+  showLiveTag?: boolean;
 }
 
 const { 
-  logo = "/placeholder-logo.png",
-  promotionalImages = ["/promo1.jpg", "/promo2.jpg", "/promo3.jpg"]
+  logo = dummyData.logo,
+  promotionalImages = dummyData.promotionalImages,
+  featuredImages = dummyData.featuredImages,
+  showLiveTag = true
 } = Astro.props;
+
+// Get initial time
+const now = new Date();
+const initialTime = now.toLocaleTimeString('en-US', { 
+  hour: '2-digit', 
+  minute: '2-digit',
+  hour12: true 
+});
 ---
 
 <div class="h-full flex flex-col">
-  {/* Top Section */}
-  <div class="flex-1 p-4">
-    <div class="mb-8">
-      <img src={logo} alt="Logo" class="w-32 h-auto" />
+  <div class="flex justify-between items-start p-1">
+    <div class="flex-1">
+      <Image src={logo} alt="Logo" width={128} height={128} class="w-32 h-auto" />
     </div>
-    <div class="space-y-4">
-      {promotionalImages.map((image, index) => (
-        <div class="relative h-40 rounded-lg overflow-hidden">
-          <img 
-            src={image} 
-            alt={`Promotional ${index + 1}`}
-            class="w-full h-full object-cover"
-          />
+    <div class="flex flex-col items-end space-y-2">
+      <div id="clock" class="text-lg font-bold">
+        {initialTime}
+      </div>
+      {showLiveTag && (
+        <div class="inline-flex items-center px-2 py-0.5 bg-red-600 text-white rounded-full">
+          <div class="w-1.5 h-1.5 bg-white rounded-full mr-1 animate-pulse"></div>
+          <span class="text-xs font-medium">LIVE</span>
         </div>
-      ))}
+      )}
     </div>
   </div>
-
-  {/* Bottom Section */}
-  <div class="h-[400px] p-4 border-t border-gray-700">
-    <div class="promotional-list space-y-4">
-      {promotionalImages.map((image, index) => (
-        <div class="promotional-item opacity-0 transition-opacity duration-500">
-          <img 
-            src={image} 
-            alt={`Promotional ${index + 1}`}
-            class="w-full h-32 object-cover rounded-lg"
-          />
-        </div>
-      ))}
-    </div>
+  
+  <div class="relative flex-1">
+    {(featuredImages as PromoItem[]).map((item: PromoItem, index: number) => (
+      <div 
+        class="absolute inset-0 transition-opacity duration-1000"
+        style={`animation: fadeInOut ${item.duration}s ${index * item.duration}s infinite;`}
+      >
+        <Image 
+          src={item.url} 
+          alt={item.title}
+          width={600}
+          height={400}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    ))}
   </div>
 </div>
 
-<style>
-  .promotional-list {
-    animation: fadeItems 15s infinite;
+<script>
+  function updateClock() {
+    const clockElement = document.getElementById('clock');
+    if (clockElement) {
+      const now = new Date();
+      clockElement.textContent = now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      });
+    }
+    // Update every second
+    setTimeout(updateClock, 1000);
   }
+  
+  // Start the clock when the page loads
+  document.addEventListener('DOMContentLoaded', updateClock);
+</script>
 
-  @keyframes fadeItems {
+<style>
+  @keyframes fadeInOut {
     0%, 100% { opacity: 0; }
-    20%, 80% { opacity: 1; }
+    10%, 90% { opacity: 1; }
   }
 </style> 

@@ -1,25 +1,22 @@
 ---
+import dummyData from '../data/dummy-data.json';
+
 interface Props {
   videoUrl?: string;
 }
 
-const { videoUrl } = Astro.props;
+const { videoUrl = dummyData.videoUrl } = Astro.props;
 ---
 
-<div class="h-full p-4">
-  <div class="h-full bg-gray-800 rounded-lg flex items-center justify-center">
-    {videoUrl ? (
-      <video 
-        src={videoUrl} 
-        class="w-full h-full object-contain"
-        controls
-        autoplay
-      />
-    ) : (
-      <div class="text-center">
-        <h2 class="text-2xl font-bold mb-2">Show video feed here</h2>
-        <p class="text-gray-400">Video content will be displayed in this area</p>
-      </div>
-    )}
+<div class="h-full overflow-hidden">
+  <div class="h-full bg-gray-800 flex items-center justify-center overflow-hidden">
+    <video 
+      src={videoUrl} 
+      class="w-full h-full object-contain"
+      controls
+      autoplay
+      loop
+      muted
+    />
   </div>
 </div> 
